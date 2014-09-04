@@ -1,5 +1,7 @@
 import pygame, sys
+import io
 from time import sleep
+from PIL import Image
 from pygame.locals import * 
 from random import shuffle
 clock = pygame.time.Clock()
@@ -23,7 +25,11 @@ unitx = sizex/xdivision
 unity = sizey/ydivision
 
 screen = pygame.display.set_mode((sizex, sizey))
-background = pygame.image.load('data/plastic_reality.png')
+image = io.BytesIO()
+image = Image.open('data/plastic_reality.png')
+beach = image.tostring()
+background = pygame.image.frombuffer(beach, (screen.get_size()), 'RGB')
+#background = pygame.image.load('data/plastic_reality.png')
 im2= pygame.Surface(screen.get_size())
 #im2.fill((0, 0, 0))
 im2 = pygame.image.load('data/plastic_reality_alt.png')
