@@ -1,0 +1,8 @@
+canoe_1278_324.png: 210, 67
+dog_138_846.png: 49, 128
+flag_126_406.png: 291, 389
+octopus_1602_896.png: 224, 172
+robot_164_148.png: 83, 119
+sandcastle_1194_772.png: 269, 269
+seapost_1750_480.png: 53, 270
+statue_422_604.png: 230, 361

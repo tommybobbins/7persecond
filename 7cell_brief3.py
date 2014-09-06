@@ -16,17 +16,17 @@ tiles = {}
 pygame.init()
 sizex=1920
 sizey=1080
-xdivision = 16
-ydivision =  9
+xdivision = 8
+ydivision =  4
 xshuf = [i for i in range(xdivision*ydivision)]
 unitx = sizex/xdivision
 unity = sizey/ydivision
 
 screen = pygame.display.set_mode((sizex, sizey))
-background = pygame.image.load('data/plastic_reality.png')
+background = pygame.image.load('data/plastic_reality_fg.png')
 im2= pygame.Surface(screen.get_size())
 #im2.fill((0, 0, 0))
-im2 = pygame.image.load('data/plastic_reality_alt.png')
+im2 = pygame.image.load('data/plastic_reality_bg.png')
 screen.blit(im2,(0,0))
 pygame.display.flip()
 
@@ -44,7 +44,7 @@ while True:
         text_surface = font.render("FPS: %f   Playtime: %f " % (clock.get_fps(),playtime), True, (255,255,255))
         screen.blit(text_surface, (10, 10))
     pygame.display.flip()
-    sleep(1)
+#    sleep(1)
     for i in range(0,7):
         random_value = xshuf[i]
         randomx,randomy = divmod(random_value, ydivision)

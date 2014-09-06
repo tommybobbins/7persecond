@@ -33,11 +33,6 @@ for file in os.listdir("data/sprites"):
         spriteboxx = int(spritex%xdivision)
         spriteboxy = int(spritey%ydivision)
         spriteboxnumber = int((spriteboxy*xdivision)+spriteboxx)
-#        sprite = pygame.image.load(os.path.join('data/sprites', file)).convert_alpha
-#        size=sprite.Surface.get_size()
-#        print size
-#        (spritesizex,spritesizey) = sprite.get_rect()
-#        print ("x=%s y=%s" % (spritesizex, spritesizey))
         tiles[spriteboxnumber] = ( spritename, spritex, spritey)
 
 
@@ -47,11 +42,9 @@ for key in tiles.keys():
  
 
 screen = pygame.display.set_mode((sizex, sizey))
-#background = pygame.image.load('data/all_on_one_no_bg.png')
-background = pygame.image.load('data/plastic_reality_bg.png')
+background = pygame.image.load('data/plastic_reality_fg.png')
 im2= pygame.Surface(screen.get_size())
 #im2.fill((0, 0, 0))
-#im2 = pygame.image.load('data/plastic_reality_bg.png')
 im2 = pygame.image.load('data/all_on_one_no_bg.png')
 screen.blit(im2,(0,0))
 pygame.display.flip()
@@ -62,18 +55,20 @@ while True:
     shuffle(xshuf)
     for i in range(0,7):
         random_value = xshuf[i]
-        try: 
-#            print random_value
-            (sprite_to_print,spx,spy)=tiles[random_value]
-            print (sprite_to_print, spx, spy)
-            print (pygame.Rect(spx,spy,120,120))
-            screen.blit(im2, (spx, spy), pygame.Rect(spx, spy, 120, 120))
-            text_surface = font.render("FPS: %f   Playtime: %f " % (clock.get_fps(),playtime), True, (255,255,255))
-            screen.blit(text_surface, (10, 10))
-#            pygame.display.flip()
-            time.sleep(1)
-            screen.blit(background, (spx, spy), pygame.Rect(spx, spy, sizex, sizey))
-#            pygame.display.flip()
-        except:
-            sprite_to_print="False"
+        randomx,randomy = divmod(random_value, ydivision)
+        randomx *= unitx
+        randomy *= unity
+#        print ("%f,%f" % (randomx,randomy))
+        screen.blit(background, (randomx, randomy), pygame.Rect(randomx, randomy, unitx, unity))
+        text_surface = font.render("FPS: %f   Playtime: %f " % (clock.get_fps(),playtime), True, (255,255,255))
+        screen.blit(text_surface, (10, 10))
+    pygame.display.flip()
+#    sleep(1)
+    for i in range(0,7):
+        random_value = xshuf[i]
+        randomx,randomy = divmod(random_value, ydivision)
+        randomx *= unitx
+        randomy *= unity
+        screen.blit(im2, (randomx, randomy), pygame.Rect(randomx, randomy, unitx, unity))
+        pygame.display.flip()
 
