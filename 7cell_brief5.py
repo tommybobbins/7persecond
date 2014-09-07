@@ -9,9 +9,14 @@ counter = 0
 pygame.font.init()
 font = pygame.font.Font(None, 30)
 
-batch_size = 7
+batch_size = 7 # 7 Squares displayed (e.g 7 of 16*9 = 7/144 )
 tiles = {}
+sprite_currently_displayed = False
 
+##### Adjust these sleep times to suit###################
+sleep_time_for_none_icons = 1 # A sprite is not displayed
+sleep_time_for_icons = 1  # A sprite is displayed
+##########################################################
 
 pygame.init()
 sizex=1920
@@ -35,10 +40,10 @@ for line in ins:
 #    print ("%s %f %f %i %i" % (spritename, spritex, spritey, extentx, extenty))
     spriteboxx = int(spritex%xdivision)
     spriteboxy = int(spritey%ydivision)
-#    print ("spriteboxx = %i spriteboxy= %i" % (spriteboxx, spriteboxy))
+    print ("spriteboxx = %i spriteboxy= %i" % (spriteboxx, spriteboxy))
     spriteboxnumber = int((spriteboxy*xdivision)+spriteboxx)
     
-#    print ("spriteboxnumber = %i " % spriteboxnumber)
+    print ("spriteboxnumber = %i " % spriteboxnumber)
     tiles[spriteboxnumber] = ( spritename, spritex, spritey, extentx, extenty)
 
 
@@ -62,7 +67,7 @@ while True:
     shuffle(xshuf)
     for i in range(0,7):
         random_value = xshuf[i]
-#        print ("Random value %i " % random_value)
+        print ("Random value %i " % random_value)
         try:
            ( spritename, spritex, spritey, extentx, extenty) = tiles[random_value]
         except:
@@ -70,11 +75,21 @@ while True:
         if (spritename):
             randomx = spritex
             randomy = spritey
-#            print ("%s %f,%f, %f, %f" % (spritename, randomx,randomy, extentx, extenty))
-            screen.blit(background, (0, 0))
-            sleep(0.2)
+            print ("%s %f,%f, %f, %f" % (spritename, randomx,randomy, extentx, extenty))
+#            screen.blit(background, (0, 0))
             screen.blit(im2, (randomx, randomy), pygame.Rect(randomx, randomy, extentx, extenty))
+            #text_surface = font.render("FPS: %f   Playtime: %f " % (clock.get_fps(),playtime), True, (255,255,255))
+            #screen.blit(text_surface, (10, 10))
             pygame.display.flip()
-#        text_surface = font.render("FPS: %f   Playtime: %f " % (clock.get_fps(),playtime), True, (255,255,255))
-#        screen.blit(text_surface, (10, 10))
+#            sleep(1)
+            sleep(sleep_time_for_icons)
+            sprite_currently_displayed = True
+        else:
+#             print ('.')
+#            sleep(1)
+            sleep(sleep_time_for_none_icons)
+        if (sprite_currently_displayed == True):
+            screen.blit(background, (0, 0))
+            pygame.display.flip()
+            sprite_currently_displayed = False
 
