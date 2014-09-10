@@ -19,8 +19,9 @@ sleep_time_for_icons = 1  # A sprite is displayed
 ##########################################################
 
 pygame.init()
-sizex=1920
-sizey=1080
+#Framebuffer size: 1776 x 952
+sizex=1776
+sizey=952
 xdivision = 16 
 ydivision = 9 
 xshuf = [i for i in range(xdivision*ydivision)]
@@ -82,7 +83,7 @@ while True:
             #screen.blit(text_surface, (10, 10))
             pygame.display.flip()
 #            sleep(1)
-            sleep(sleep_time_for_icons)
+            #sleep(sleep_time_for_icons)
             sprite_currently_displayed = True
         else:
 #             print ('.')
